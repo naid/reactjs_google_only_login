@@ -17,39 +17,54 @@ const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUser, setIsUser] = useState(false);
   const [profile, setProfile] = useState([]);
+  const [message, setMessage] = useState('Please wait while we check your user status.');
+  const [errorStatus, setErrorStatus] = useState('RUNNING');
 
   function callLogin(){
-    console.log('This is the login provider');
+    //console.log('This is the login provider');
   }
 
   function callLogin2(){
-    console.log('2nd from provider');
+    //console.log('2nd from provider');
   }
+
+  const getErrorMessage = (type) => {
+
+    const contentMap = {
+      'RUNNING': <div>Please wait for verification.</div>,
+      'ERR_NETWORK': <div>There's a problem connecting to the server. Please try aging in a few minutes.</div>,
+      'ERR_BAD_REQUEST': <div>The Google user is not yet a permitted user of the system.</div>,
+    };
+  
+    return contentMap[type] || <div>Please wait for verification</div>;
+  };
 
   const checkEmail = async (email) => {
     if(typeof email !== "undefined") {
     // } else {
         try {
-            console.log('POSTING TO '+email+' CHECK'); // logs "Email exists in database" or "Email does not exist in database"
+            //console.log('POSTING TO '+email+' CHECK'); // logs "Email exists in database" or "Email does not exist in database"
             
             const response = await axios.post('http://localhost:3001/check-email/', { email })
               .then((response) => {
-                console.log('WHATRESPONSE');
-                console.log(response);
+                //console.log('WHATRESPONSE');
+                //console.log(response);
                 setIsUser(true);
+                setMessage('');
               }, (error) => {
-                console.log("ERRAH");
-                console.log(error);
+                //console.log("ERRAH");
+                //console.log(error);
                 setIsUser(false);
+                setErrorStatus(error.code)
+                setMessage(getErrorMessage(errorStatus));
               }
             );
-            console.log(response.data); // logs "Email exists in database" or "Email does not exist in database"
           } catch (error) {
-            console.error(error);
+            //console.log("ERRAHRUUH");
+            //console.log(error); // logs "Email exists in database" or "Email does not exist in database"
           }
     }
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +73,7 @@ const LoginProvider = ({ children }) => {
         await Promise.resolve();
         checkEmail(profile.email);
       } catch (error) {
-        console.error(error);
+        //console.error(error);
       }
     };
     if (profile.email) {
@@ -85,7 +100,7 @@ const LoginProvider = ({ children }) => {
   };
 
   const logout = () => {
-    console.log('Provider Logout');
+    //console.log('Provider Logout');
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     setIsUser(false);
@@ -94,7 +109,7 @@ const LoginProvider = ({ children }) => {
   };
 
   return (
-    <LoginContext.Provider value={{ isLoggedIn, isUser, profile, login, logout }}>
+    <LoginContext.Provider value={{ isLoggedIn, isUser, profile, message, login, logout }}>
       <LoginUpdateContext.Provider value={ {callLogin, callLogin2} }>
         {children}
       </LoginUpdateContext.Provider>

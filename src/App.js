@@ -21,7 +21,6 @@ function App() {
       <GoogleOAuthProvider clientId={googleApiKey}>
       <BrowserRouter>
       <LoginProvider>
-        <div className="fsd">{process.env.REACT_APP_API_KEY}=fsdfsdfds</div>
         <Navbar />
         <div className="flex">
           <aside className="h-screen sticky top-0">

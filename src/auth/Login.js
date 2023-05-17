@@ -4,7 +4,7 @@ import { googleLogout, GoogleLogin } from '@react-oauth/google';
 
 
 const Login = () => {
-  const { isLoggedIn, isUser, profile, login, logout } = useContext(LoginContext);
+  const { isLoggedIn, isUser, profile, message, login, logout } = useContext(LoginContext);
   // const [localProfile, setLocalProfile] = useState([]);
   
   useEffect(() => {
