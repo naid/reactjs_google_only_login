@@ -31,12 +31,13 @@ const LoginProvider = ({ children }) => {
   const getErrorMessage = (type) => {
 
     const contentMap = {
+      'VERIFIED': <div></div>,
       'RUNNING': <div>Please wait for verification.</div>,
       'ERR_NETWORK': <div>There's a problem connecting to the server. Please try aging in a few minutes.</div>,
-      'ERR_BAD_REQUEST': <div>The Google user is not yet a permitted user of the system.</div>,
+      'ERR_BAD_REQUEST': <div>This Google user is not yet a permitted user of the system.</div>,
     };
   
-    return contentMap[type] || <div>Please wait for verification</div>;
+    return contentMap[type] || <div>There's a problem connecting with the server. Please try again in a few minutes.</div>;
   };
 
   const checkEmail = async (email) => {
@@ -50,18 +51,19 @@ const LoginProvider = ({ children }) => {
                 //console.log('WHATRESPONSE');
                 //console.log(response);
                 setIsUser(true);
+                setErrorStatus('VERIFIED');
                 setMessage('');
               }, (error) => {
-                //console.log("ERRAH");
-                //console.log(error);
+                console.log("ERRAH");
+                console.log(error);
                 setIsUser(false);
-                setErrorStatus(error.code)
-                setMessage(getErrorMessage(errorStatus));
+                setErrorStatus(error.code);
+                setMessage(getErrorMessage(error.code));
               }
             );
           } catch (error) {
-            //console.log("ERRAHRUUH");
-            //console.log(error); // logs "Email exists in database" or "Email does not exist in database"
+            console.log("ERRAHRUUH");
+            console.log(error); // logs "Email exists in database" or "Email does not exist in database"
           }
     }
   };
@@ -109,7 +111,7 @@ const LoginProvider = ({ children }) => {
   };
 
   return (
-    <LoginContext.Provider value={{ isLoggedIn, isUser, profile, message, login, logout }}>
+    <LoginContext.Provider value={{ isLoggedIn, isUser, profile, message, login, logout , errorStatus}}>
       <LoginUpdateContext.Provider value={ {callLogin, callLogin2} }>
         {children}
       </LoginUpdateContext.Provider>

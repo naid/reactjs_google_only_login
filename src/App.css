@@ -1,5 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
-  text-align: center;
+
 }
 
 .App-logo {
@@ -44,4 +48,3 @@
 .profile-pic {
   border-radius: 50%;
 }
-

@@ -1,0 +1,37 @@
+{
+    "message": "Request failed with status code 404",
+    "name": "AxiosError",
+    "stack": "AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/static/js/bundle.js:50153:12)\n    at XMLHttpRequest.onloadend (http://localhost:3000/static/js/bundle.js:48844:66)",
+    "config": {
+        "transitional": {
+            "silentJSONParsing": true,
+            "forcedJSONParsing": true,
+            "clarifyTimeoutError": false
+        },
+        "adapter": [
+            "xhr",
+            "http"
+        ],
+        "transformRequest": [
+            null
+        ],
+        "transformResponse": [
+            null
+        ],
+        "timeout": 0,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "env": {},
+        "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        },
+        "method": "post",
+        "url": "http://localhost:3001/check-email/",
+        "data": "{\"email\":\"naid.rm@gmail.com\"}"
+    },
+    "code": "ERR_BAD_REQUEST",
+    "status": 404
+}
