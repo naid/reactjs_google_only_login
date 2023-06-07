@@ -6,8 +6,9 @@ const Sidebar = () => {
     const { isLoggedIn, isUser } = useContext(LoginContext);
 
     return ( 
+        <>
+        {isLoggedIn && isUser &&
         <div className="sidebar">
-            {isLoggedIn && isUser &&
                 <div className="flex flex-col items-center w-16 h-full overflow-hidden text-indigo-300 bg-indigo-900 rounded">
                     <Link className="flex items-center justify-center mt-3" >
                     <svg className="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -37,7 +38,7 @@ const Sidebar = () => {
                     </Link>
                 </div>
                 </div>
-            }
+            
             <div className="flex flex-col items-center w-16 h-full overflow-hidden text-indigo-300 bg-indigo-900 rounded">
                 
                 <Link className="flex items-center justify-center w-12 h-12 mt-auto hover:bg-indigo-700" >
@@ -45,6 +46,8 @@ const Sidebar = () => {
                 </Link>
             </div>
         </div>
+        }
+        </>
      );
 }
  

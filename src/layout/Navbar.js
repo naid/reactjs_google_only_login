@@ -5,7 +5,6 @@ import Login from '../auth/Login';
 
 const Navbar = ({ setSigned, setProfile }) => {
     const { isLoggedIn, profile, message } = useLogin();
-    const { callLogin, callLogin2 } = useLoginUpdate();
      
     return ( 
         <div className="navbar">
