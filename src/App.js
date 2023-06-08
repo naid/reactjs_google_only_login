@@ -4,6 +4,7 @@ import LoginProvider from "./auth/LoginProvider";
 import Navbar from './layout/Navbar';
 import Sidebar from './layout/Sidebar';
 import Home from './Home';
+import { default as Organizations } from './features/organizations/List.js';
 import Test from './content/Test';
 import { BrowserRouter } from 'react-router-dom'
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -30,6 +31,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="test/*" element={<Test />} />
+              <Route path="/organizations" element={<Organizations />} />
             </Routes>
           </div>
         </div>
