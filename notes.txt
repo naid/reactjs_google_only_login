@@ -1,1 +1,2 @@
 > Lazy load Eula on not google logged
+> Update CSS, use Tailwind
