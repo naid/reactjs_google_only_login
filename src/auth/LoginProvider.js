@@ -64,8 +64,7 @@ const LoginProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
       try {
         // wait for variable assignment to complete
         await Promise.resolve();
@@ -74,11 +73,7 @@ const LoginProvider = ({ children }) => {
         //console.error(error);
       }
     };
-    if (profile.email) {
-      fetchData();
-    }
-  }, [profile.email]);
-
+  
   useEffect(() => {
     // Check if the user is already logged in using a stored token
     const token = localStorage.getItem("token");
@@ -86,7 +81,10 @@ const LoginProvider = ({ children }) => {
     if (token) {
         setProfile(jwt_decode(token));
         setIsLoggedIn(true);
+    } else if (profile.email) {
+      fetchData();
     }
+  
   }, []);
 
   const login = (token) => {
