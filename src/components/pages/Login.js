@@ -1,6 +1,7 @@
 import { useReducer, useState } from "react"
 import { AuthData } from "../../auth/AuthWrapper"
 import { useNavigate } from "react-router-dom"
+import { GoogleLogin } from '@react-oauth/google';
 
 export const Login = () => {
 
@@ -21,26 +22,21 @@ export const Login = () => {
         }
     }
      
-
+    const responseMessage = (response) => {
+        login(response.credential);
+        navigate("/account");
+    };
+    
+    const getError = (error) => {
+        setErrorMessage(error);        
+    };
 
     return (
         <div className="page">
             <h2>Login Page</h2>
             <div className="inputs">
-                <div className="input">
-                    <input type="text" id="username" value={formData.username} onChange={(e) => setFormData({username: e.target.value})} />
-                </div>
-                <div className="input">
-                    <input type="password" id="password" value={formData.password} onChange={(e) => setFormData({password: e.target.value})} />
-                </div>
-                <div className="button">
-                    <button onClick={doLogin}>Log In</button>
-                </div>
-                {errorMessage ?
-                    <div className="error">{errorMessage}</div>
-                : 
-                    null
-                }
+
+                <GoogleLogin onSuccess={responseMessage} onError={getError} />
             </div>
         </div>
     )
