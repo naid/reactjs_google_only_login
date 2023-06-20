@@ -57,9 +57,10 @@ export const AuthWrapper = () => {
       // check if there is saved login info
       const token = localStorage.getItem("token");
       if (token) {
-          setUser({data: jwt_decode(token), isAuthenticated: true})
+          console.log('Check Token (60)');
+          setUser({data: jwt_decode(token), isAuthenticated: true, isVerified: false})
       } else  {
-          
+          console.log('Token absent (63)');          
       }
     }, []);
 
